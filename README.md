@@ -16,7 +16,7 @@ A fast, interactive TUI (Terminal User Interface) for browsing and resuming Clau
 ### Install from source
 
 ```bash
-git clone https://github.com/cstobie/cc-res.git
+git clone https://github.com/lanmalkieri/cc-res.git
 cd cc-res
 go build
 # Optional: move to PATH
@@ -26,7 +26,7 @@ mv cc-res ~/bin/  # or /usr/local/bin
 ### Install with go install
 
 ```bash
-go install github.com/cstobie/cc-res@latest
+go install github.com/lanmalkieri/cc-res@latest
 ```
 
 ## Usage
@@ -143,7 +143,7 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## Author
 
-Created by [cstobie](https://github.com/cstobie)
+Created by [lanmalkieri](https://github.com/lanmalkieri)
 
 ## Acknowledgments
 
