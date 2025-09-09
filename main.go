@@ -43,6 +43,7 @@ type Session struct {
 	ModTime     time.Time
 	Messages    []ChatLine
 	Summary     string
+	LastActive  time.Time
 }
 
 type model struct {
@@ -286,12 +287,19 @@ func loadSessions() ([]Session, error) {
 
 			sessionID := strings.TrimSuffix(file.Name(), ".jsonl")
 			
+			// Get the timestamp of the last message for better sorting
+			lastActive := info.ModTime()
+			if len(messages) > 0 {
+				lastActive = messages[len(messages)-1].Timestamp
+			}
+			
 			session := Session{
 				ProjectPath: entry.Name(),
 				SessionID:   sessionID,
 				FilePath:    filePath,
 				ModTime:     info.ModTime(),
 				Messages:    messages,
+				LastActive:  lastActive,
 			}
 
 			if os.Getenv("USE_AI_SUMMARY") == "1" {
@@ -305,7 +313,7 @@ func loadSessions() ([]Session, error) {
 	}
 
 	sort.Slice(sessions, func(i, j int) bool {
-		return sessions[i].ModTime.After(sessions[j].ModTime)
+		return sessions[i].LastActive.After(sessions[j].LastActive)
 	})
 
 	return sessions, nil
